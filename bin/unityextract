@@ -101,9 +101,10 @@ class UnityExtract:
 			elif obj.type == "TextAsset":
 				if isinstance(d.script, bytes):
 					filename, mode = d.name + ".bin", "wb"
+					self.write_to_file(filename, d.script, mode=mode)
 				else:
-					filename, mode = d.name + ".txt", "w"
-				self.write_to_file(filename, d.script, mode=mode)
+					filename, mode = d.name + ".txt", "wb"
+					self.write_to_file(filename, d.script.encode('utf-8'), mode=mode)
 
 			elif obj.type == "Texture2D":
 				filename = d.name + ".png"
